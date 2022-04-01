@@ -2,7 +2,10 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   router: {
-    base: '/nuxt-canvas-study/'
+    base: '/nuxt-canvas-study/',
+    // nuxt.config.js に書いた middleware はすべての page 用。
+    // WARN: ここは middlewares じゃダメ。 middleware.
+    middleware: ['access-logging']
   },
 
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
