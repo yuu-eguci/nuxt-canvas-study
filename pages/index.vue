@@ -1,31 +1,7 @@
 <template>
-  <v-row justify="center" align="center">
+  <v-row justify="center">
     <v-col cols="12">
-      <v-alert
-        dense
-        text
-        type="success"
-      >
-        <div>
-          Nuxt.js + Object Style + Vuetify + Canvas + GitHub Pages
-          <v-btn
-            class="ms-2"
-            elevation="2"
-            fab
-            x-small
-            color="teal"
-            href="https://github.com/yuu-eguci/nuxt-canvas-study"
-            target="_blank"
-          >
-            <v-icon>
-              mdi-github
-            </v-icon>
-          </v-btn>
-        </div>
-        <h1>
-          Nuxt-Canvas-Study
-        </h1>
-      </v-alert>
+      <TheIndexHeader />
     </v-col>
     <v-col
       cols="12"
@@ -37,21 +13,70 @@
       cols="12"
       md="6"
     >
-      TheNumberInput, TheStringInput
+      <!--
+        QUESTION: こうやって、自作 component に v-model を定義するときは……
+                  どう定義する?
+                  あるいは、定義せずにどう実装する?
+      -->
+      <TheNumberInput
+        :set-the-number="setTheNumber"
+      />
+      <TheStringInput
+        :set-the-string="setTheString"
+      />
+      <v-btn @click="onClickConsoleLogButton">
+        Console.log the number and the string
+      </v-btn>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+// QUESTION: これ↓は props とか無いので presentational/View.vue だけ用意している。
+//           それでいいのかな?
+//           -> それで OK. Dialog とかもそう。
+import TheIndexHeader from '@/components/index/TheIndexHeader/presentational/TheIndexHeaderView.vue'
 import TheCanvas from '@/components/index/TheCanvas/container/TheCanvasContainer.vue'
+import TheNumberInput from '@/components/index/TheNumberInput/container/TheNumberInputContainer.vue'
+import TheStringInput from '@/components/index/TheStringInput/container/TheStringInputContainer.vue'
 
 // NOTE: vue-cli と近い使用感を実現するため Object Style で実装します。
 export default Vue.extend({
   name: 'IndexPage',
 
   components: {
-    TheCanvas
+    TheIndexHeader,
+    TheCanvas,
+    TheNumberInput,
+    TheStringInput
+  },
+
+  data: () => ({
+    theNumber: 0,
+    theString: ''
+  }),
+
+  methods: {
+    // 子コンポーネントに、 theNumber を変更してもらうための method だよ。
+    setTheNumber (newValue: number) {
+      this.theNumber = newValue
+    },
+
+    setTheString (newValue: string) {
+      this.theString = newValue
+    },
+
+    // QUESTION: このような、クリックしたときに発火させる関数は
+    //           container に定義する? presentational に定義する?
+    //           -> 役割としては、 container
+    //           -> onClick の処理が複数あったりしたら presentational に定義することもある。
+    onClickConsoleLogButton () {
+      console.info({
+        theNumber: this.theNumber,
+        theString: this.theString
+      })
+    }
   }
 })
 </script>
