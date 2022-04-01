@@ -98,20 +98,27 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import VueDrawingCanvas from 'vue-drawing-canvas'
+
+interface DataType {
+  eraser: boolean,
+  backgroundImage: string
+}
 
 export default Vue.extend({
   name: 'TheCanvasView',
 
   components: {
+    VueDrawingCanvas
   },
 
   props: {
   },
 
-  data () {
+  data (): DataType {
     return {
       eraser: false,
-      backgroundImage: null
+      backgroundImage: ''
     }
   },
 
@@ -125,6 +132,13 @@ export default Vue.extend({
 
     onClickResetCanvas (): void {
       console.info('onClickResetCanvas')
+
+      // QUESTION: Object is possibly 'undefined'.Vetur(2532)
+      //           ↓なんでやねん。これも違う場所の型不足か?
+      //               -> なんかよくわからんけど ;(... as any) すると通る。
+      //               -> any は object 型のひとつで、 undefined ではないことを意味する。
+      //               -> 型が用意されていない package だったら as any 使おう...
+      ;(this.$refs.VueCanvasDrawing as any).reset()
     },
 
     onClickSetImageA (): void {
