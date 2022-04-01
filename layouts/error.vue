@@ -28,6 +28,9 @@ export default {
       otherError: 'An error occurred'
     }
   },
+  mounted () {
+    console.error(this.error)
+  },
   head () {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
