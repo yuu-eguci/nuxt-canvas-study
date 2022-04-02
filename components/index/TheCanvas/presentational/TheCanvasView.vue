@@ -127,12 +127,15 @@ export default Vue.extend({
 
   methods: {
     downloadCanvas (): void {
-      console.info('downloadCanvas')
+      const canvas = (this.$refs.VueCanvasDrawing as any).$el
+      const base64 = canvas.toDataURL('image/jpeg')
+      const link = document.createElement('a')
+      link.href = base64
+      link.download = 'canvas-image'
+      link.click()
     },
 
     onClickResetCanvas (): void {
-      console.info('onClickResetCanvas')
-
       // QUESTION: Object is possibly 'undefined'.Vetur(2532)
       //           ↓なんでやねん。これも違う場所の型不足か?
       //               -> なんかよくわからんけど ;(... as any) すると通る。
@@ -142,11 +145,13 @@ export default Vue.extend({
     },
 
     onClickSetImageA (): void {
-      console.info('onClickSetImageA')
+      this.backgroundImage = require('@/assets/penta.png')
+      ;(this.$refs.VueCanvasDrawing as any).redraw()
     },
 
     onClickSetImageB (): void {
-      console.info('onClickSetImageB')
+      this.backgroundImage = require('@/assets/hexa.png')
+      ;(this.$refs.VueCanvasDrawing as any).redraw()
     }
   }
 })
