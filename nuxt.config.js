@@ -84,5 +84,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // XXX: 今の所まったく意味がわかっていないが、この設定を入れることで下記問題が解消する。
+    //      - 外部 package の vue-drawing-canvas を rendering する段で、
+    //        [Vue warn]: `createElement()` has been called outside of render function.
+    //        Uncaught (in promise) TypeError: Cannot read properties of null (reading 'getContext')
+    //        というエラーが発生する。
+    extend (config) {
+      // Include the compiler version of Vue so that <component-name> works
+      config.resolve.alias.vue$ = 'vue/dist/vue.esm.js'
+    }
   }
 }
