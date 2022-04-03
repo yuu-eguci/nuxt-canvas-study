@@ -31,7 +31,10 @@ declare module 'vuex/types/index' {
 }
 
 // NOTE: _ をつけると、 "使わない引数なので気にしないでね" という意味になる。らしい。
-const myPlugin: Plugin = (_context, inject) => {
+const myPlugin: Plugin = (context, inject) => {
+  if (!context.isDev) {
+    return
+  }
   // eslint-disable-next-line no-console
   inject('debug', (...args: any[]) => console.log(...args))
 }
