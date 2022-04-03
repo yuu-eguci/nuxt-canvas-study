@@ -1,6 +1,7 @@
+import { NuxtConfig } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
 
-export default {
+const nuxtConfig: NuxtConfig = {
   router: {
     base: '/nuxt-canvas-study/',
     // nuxt.config.js に書いた middleware はすべての page 用。
@@ -91,7 +92,9 @@ export default {
     //        というエラーが発生する。
     extend (config) {
       // Include the compiler version of Vue so that <component-name> works
-      config.resolve.alias.vue$ = 'vue/dist/vue.esm.js'
+      (config.resolve as any).alias.vue$ = 'vue/dist/vue.esm.js'
     }
   }
 }
+
+export default nuxtConfig
