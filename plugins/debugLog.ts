@@ -1,32 +1,32 @@
 // NOTE: Plugin の作り方はまだよくわかっていないが、
-//       typescript.nuxtjs.org のコード↓をそのままコピペし、 $debug 用に改造しています。
+//       typescript.nuxtjs.org のコード↓をそのままコピペし、 $debugLog 用に改造しています。
 //       https://typescript.nuxtjs.org/cookbook/plugins
 import { Plugin } from '@nuxt/types'
 
 declare module 'vue/types/vue' {
-  // this.$debug inside Vue components
+  // this.$debugLog inside Vue components
   interface Vue {
-    $debug(...args: any[]): void
+    $debugLog(...args: any[]): void
   }
 }
 
 declare module '@nuxt/types' {
-  // nuxtContext.app.$debug inside asyncData, fetch, plugins, middleware, nuxtServerInit
+  // nuxtContext.app.$debugLog inside asyncData, fetch, plugins, middleware, nuxtServerInit
   interface NuxtAppOptions {
-    $debug(...args: any[]): void
+    $debugLog(...args: any[]): void
   }
-  // nuxtContext.$debug
+  // nuxtContext.$debugLog
   interface Context {
-    $debug(...args: any[]): void
+    $debugLog(...args: any[]): void
   }
 }
 
 declare module 'vuex/types/index' {
-  // this.$debug inside Vuex stores
+  // this.$debugLog inside Vuex stores
   // FIXME: どう解決したらよいのかわかんない。
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Store<S> {
-    $debug(...args: any[]): void
+    $debugLog(...args: any[]): void
   }
 }
 
@@ -34,7 +34,7 @@ declare module 'vuex/types/index' {
 const myPlugin: Plugin = (context, inject) => {
   if (context.isDev) {
     // eslint-disable-next-line no-console
-    inject('debug', (...args: any[]) => console.log(...args))
+    inject('debugLog', (...args: any[]) => console.log(...args))
   }
 }
 

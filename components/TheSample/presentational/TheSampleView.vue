@@ -56,11 +56,11 @@ export default Vue.extend({
       // computed と methods で同じ props (Function でも String でも) 使ってて、
       // computed のほうで返り値の型 (: string とか) を書いてないと、 methods のほうで
       // 上述エラーが出る………
-      this.$debug(this.getRandomData())
-      // this.$debug(this.$props.getRandomData())
+      this.$debugLog(this.getRandomData())
+      // this.$debugLog(this.$props.getRandomData())
     },
     getAlan () {
-      this.$debug(this.alan)
+      this.$debugLog(this.alan)
     }
   }
 })

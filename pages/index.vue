@@ -80,7 +80,7 @@ export default Vue.extend({
     //           -> 役割としては、 container
     //           -> onClick の処理が複数あったりしたら presentational に定義することもある。
     onClickConsoleLogButton () {
-      this.$debug({
+      this.$debugLog({
         theNumber: this.theNumber,
         theString: this.theString
       })

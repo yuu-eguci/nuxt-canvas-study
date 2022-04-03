@@ -22,9 +22,9 @@ export default Vue.extend({
     // console.log(foo)
 
     // eslint-disable-next-line
-    this.$debug(foo())
-    this.$debug(bar())
-    this.$debug(new Baz(1, 2))
+    this.$debugLog(foo())
+    this.$debugLog(bar())
+    this.$debugLog(new Baz(1, 2))
   }
 })
 </script>
