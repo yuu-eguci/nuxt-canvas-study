@@ -3,6 +3,14 @@
     <v-col cols="12">
       <TheIndexHeader />
     </v-col>
+    <v-col cols="12">
+      <v-btn @click="$i18n.setLocale('en')">
+        en
+      </v-btn>
+      <v-btn @click="$i18n.setLocale('ja')">
+        ja
+      </v-btn>
+    </v-col>
     <v-col
       cols="12"
       md="6"

@@ -4,7 +4,7 @@
     class="p-3"
   >
     <v-card-title>
-      The handwriting
+      {{ $t('indexPage.theCanvas.theHandwriting') }}
     </v-card-title>
     <v-card-text>
       <div>
@@ -31,7 +31,7 @@
             :disabled="!eraser"
             @click="() => { eraser = false }"
           >
-            Draw
+            {{ $t('indexPage.theCanvas.draw') }}
           </v-btn>
         </v-col>
         <v-col
@@ -43,7 +43,7 @@
             :disabled="eraser"
             @click="() => { eraser = true }"
           >
-            Eraser
+            {{ $t('indexPage.theCanvas.eraser') }}
           </v-btn>
         </v-col>
         <v-col
@@ -54,7 +54,7 @@
             color="error"
             @click.prevent="onClickResetCanvas"
           >
-            Reset
+            {{ $t('indexPage.theCanvas.reset') }}
           </v-btn>
         </v-col>
         <v-col
@@ -64,7 +64,7 @@
             block
             @click="downloadCanvas"
           >
-            Download
+            {{ $t('indexPage.theCanvas.download') }}
           </v-btn>
         </v-col>
         <v-col
@@ -76,7 +76,7 @@
             color="teal"
             @click="onClickSetImageA"
           >
-            Set image A
+            {{ $t('indexPage.theCanvas.setImageA') }}
           </v-btn>
         </v-col>
         <v-col
@@ -88,7 +88,7 @@
             color="teal"
             @click="onClickSetImageB"
           >
-            Set image B
+            {{ $t('indexPage.theCanvas.setImageB') }}
           </v-btn>
         </v-col>
       </v-row>
