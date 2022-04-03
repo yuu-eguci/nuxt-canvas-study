@@ -70,7 +70,8 @@ const nuxtConfig: NuxtConfig = {
           fallbackLocale: 'ja'
         },
         vueI18nLoader: true,
-        lazy: true
+        lazy: true,
+        strategy: 'no_prefix'
       }
     ]
   ],
