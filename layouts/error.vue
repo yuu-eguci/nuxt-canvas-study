@@ -28,15 +28,16 @@ export default {
       otherError: 'An error occurred'
     }
   },
-  mounted () {
-    console.error(this.error)
-  },
   head () {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError
     return {
       title
     }
+  },
+  mounted () {
+    // eslint-disable-next-line no-console
+    console.error(this.error)
   }
 }
 </script>
