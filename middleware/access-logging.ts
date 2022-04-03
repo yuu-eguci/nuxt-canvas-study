@@ -1,7 +1,7 @@
 import { Middleware } from '@nuxt/types'
 
 const myMiddleware: Middleware = (context): void => {
-  context.app.$debugLog(JSON.stringify({
+  context.app.$debug(JSON.stringify({
     hereIs: 'middleware/access-logging',
     fullPathIs: context.route.fullPath
   }))
