@@ -22,6 +22,9 @@
     </div>
     <h1>
       Nuxt-Canvas-Study
+      <small>
+        {{ envName }}
+      </small>
     </h1>
   </v-alert>
 </template>
@@ -30,6 +33,10 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'TheIndexHeaderView'
+  name: 'TheIndexHeaderView',
+
+  data: () => ({
+    envName: process.env.ENV_NAME
+  })
 })
 </script>

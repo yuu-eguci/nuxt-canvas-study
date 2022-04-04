@@ -73,6 +73,13 @@ const nuxtConfig: NuxtConfig = {
         lazy: true,
         strategy: 'no_prefix'
       }
+    ],
+    [
+      '@nuxtjs/dotenv',
+      {
+        // 起動時に `ENV=test nuxt` というように指定することで、使用する .env.xxx を切り替えています。
+        filename: '.env.' + process.env.ENV
+      }
     ]
   ],
 
