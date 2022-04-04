@@ -83,6 +83,16 @@ const nuxtConfig: NuxtConfig = {
     ]
   ],
 
+  publicRuntimeConfig: {
+    // NOTE: @nuxt/dotenv はもう古い、 publicRuntimeConfig を使え、という情報があるが、
+    //       それは .env のみ使う場合の話です。
+    //       本プロジェクトでは複数の .env.*** を使うので本設定は利用しません。
+  },
+
+  privateRuntimeConfig: {
+    // NOTE: 本プロジェクトは SPA です。本設定は利用しません。
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
