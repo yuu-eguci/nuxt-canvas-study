@@ -1,9 +1,14 @@
 import { NuxtConfig } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
 
+// .env の内容を本ファイルで利用するための設定です。
+require('dotenv').config({
+  path: `.env.${process.env.ENV}`
+})
+
 const nuxtConfig: NuxtConfig = {
   router: {
-    base: '/nuxt-canvas-study/',
+    base: process.env.ROUTER_BASE,
     // nuxt.config.js に書いた middleware はすべての page 用。
     // WARN: ここは middlewares じゃダメ。 middleware.
     middleware: ['access-logging']
@@ -13,6 +18,8 @@ const nuxtConfig: NuxtConfig = {
   ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
+  // NOTE: yarn generate でデプロイするような場合 static。でないと以下のような warn が出ます。
+  //       [warn] When using `nuxt generate`, you should set `target: 'static'` in your `nuxt.config`
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -29,7 +36,7 @@ const nuxtConfig: NuxtConfig = {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/nuxt-canvas-study//favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }
     ]
   },
 
