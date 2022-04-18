@@ -10638,10 +10638,10 @@ vue-demi@latest:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"
   integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
 
-vue-drawing-canvas@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/vue-drawing-canvas/-/vue-drawing-canvas-1.0.9.tgz#36491e59cb0caf6fcf3c63f730d5d43765196de1"
-  integrity sha512-BDSx5RK+mhUoMWNM69UkPVymIfKslfLoZyVYX14yMjVkuRZ807pXeT21fATbVqLpWYm9cNJL99fYpCpxlICgzA==
+vue-drawing-canvas@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/vue-drawing-canvas/-/vue-drawing-canvas-1.0.10.tgz#71dce11e605bfae6bcd29c2be6e89937b9d13cff"
+  integrity sha512-PMAXThAhJFKxls07fKEheNnYLTexlKHWBOMtwlZlOX5Li3fP6wFaPS09g46VDDgRfw8GWIanfeehrVLwa2dcmg==
   dependencies:
     vue-demi latest
 
