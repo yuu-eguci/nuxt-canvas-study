@@ -41,21 +41,16 @@ Node.js のバージョン指定は `.node-version`。
 ## 既知の制約
 
 - Nuxt 2 / Vue 2 / Vuetify 2 はサポート終了済み。
-- `yarn audit` の指摘が残る (2026-10-20 時点で Critical 2 、 High 74 、 Moderate 71 、 Low 18) 。
-- 残りはすべて Nuxt 2 (webpack 4) 、 Vue 2 、 Vuetify 2 、 @nuxtjs/i18n 7 、 Jest 29 、 ESLint 8 系が固定している旧メジャー版の依存。
-    - 例: tar 6 (terser-webpack-plugin 経由) 、 devalue 2 (@nuxtjs/i18n 経由) 、 webpack-dev-middleware 5 (@nuxt/webpack 経由) 。
-    - 修正版がないか、互換性のない新メジャー版 (cookie 、 decode-uri-component 、 tmp のような 0.x 系は新マイナー版) にしかない。
-    - そのため、 resolutions で修正版へ差し替えると依存元が動く保証がない。
-    - 同じメジャー版で直せる minimatch 9 だけは、 package.json の resolutions で修正版にしている。
-    - 解消には Nuxt 3 以降 (Vue 3 、 Vuetify 3) への移行が必要。
-- 影響範囲
-    - 大半はビルド時と dev サーバ実行時だけ使う依存。
-    - 公開されるのは静的ファイルだけ (`ssr: false` 、 `target: 'static'`) なので、サーバ側の指摘は公開サイトには影響しない。
-    - ブラウザへ配信される依存で指摘が残るのは vue と vuetify 。
-        - vue: テンプレートコンパイラ (parseHTML) の ReDoS (CVE-2024-9506) 。本アプリは利用者の入力をテンプレートとして扱わない。
-        - vuetify: VDatePicker の XSS (CVE-2025-8082) と、設定値をマージする処理の prototype pollution (CVE-2025-8083) 。本アプリは VDatePicker を使わず、設定値に外部入力を渡していない。
-    - nuxt 自体への指摘 (navigateTo 、 `<NoScript>`) は Nuxt 3 の機能に関するもので、 Nuxt 2 にはその機能がない。
-    - dev サーバは `compose.yaml` で `127.0.0.1` にだけ公開している。
+- `yarn audit` の残件は Critical 2 / High 74 / Moderate 71 / Low 18 (2026-10-20 確認) 。
+- 残件は旧バージョンの依存由来。修正版がないものや、互換性のない更新が必要なものがある。
+- 同じメジャー版で更新できる minimatch 9 は `resolutions` で修正版を指定。
+- 残件を解消するには、 Nuxt 3 以降 / Vue 3 / Vuetify 3 などへの移行が必要。
+- 大半はビルド・ dev サーバ用の依存。公開するのは静的ファイルのみ。
+- ブラウザ側の Vue にはテンプレートコンパイラの ReDoS 指摘が残る (CVE-2024-9506) 。このアプリは入力をテンプレートとして扱わない。
+- Vuetify には VDatePicker の XSS (CVE-2025-8082) と設定マージ時の prototype pollution (CVE-2025-8083) の指摘が残る。このアプリは VDatePicker を使わず、設定値に外部入力を渡していない。
+- ブラウザ側の cookie 0.5 (@nuxtjs/i18n 経由) にも name / path / domain の検証不足の指摘が残る (CVE-2024-47764) 。このアプリでは、これらの値に @nuxtjs/i18n の固定値を使う。
+- Nuxt の `navigateTo`・ `<NoScript>` に関する指摘は、利用していない Nuxt 3 の機能が対象。
+- Docker の dev サーバは `127.0.0.1` にだけ公開。
 
 ## Nuxt + TypeScript の学び
 
