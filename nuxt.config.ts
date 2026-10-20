@@ -1,8 +1,9 @@
 import { NuxtConfig } from '@nuxt/types'
+import dotenv from 'dotenv'
 import colors from 'vuetify/es5/util/colors'
 
 // .env の内容を本ファイルで利用するための設定です。
-require('dotenv').config({
+dotenv.config({
   path: `.env.${process.env.ENV}`
 })
 
@@ -62,8 +63,6 @@ const nuxtConfig: NuxtConfig = {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
     [
       '@nuxtjs/i18n',
       {
@@ -91,19 +90,11 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   publicRuntimeConfig: {
-    // NOTE: @nuxt/dotenv はもう古い、 publicRuntimeConfig を使え、という情報があるが、
-    //       それは .env のみ使う場合の話です。
-    //       本プロジェクトでは複数の .env.*** を使うので本設定は利用しません。
+    // NOTE: 本プロジェクトでは @nuxtjs/dotenv で .env.*** の値を vue 側へ渡しているため、本設定は利用しません。
   },
 
   privateRuntimeConfig: {
     // NOTE: 本プロジェクトは SPA です。本設定は利用しません。
-  },
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

@@ -1,46 +1,35 @@
 name: cd-github-pages
 
+# NOTE: 意図しない公開を避けるため、デプロイは Actions 画面から手動で実行します。
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  ci:
+  cd:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v7
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v7
         with:
-          node-version: 16.x
-          check-latest: true
-
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            yarn-
+          node-version-file: .node-version
+          cache: yarn
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Run generate for github-pages 🍒
         run: yarn generate-for-github-pages
 
       - name: Deploy to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           # NOTE: カスタムドメインが導入されることがあればここに cname が設定されます。

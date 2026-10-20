@@ -99,6 +99,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueDrawingCanvas from 'vue-drawing-canvas'
+import pentaImage from '@/assets/penta.png'
+import hexaImage from '@/assets/hexa.png'
 
 interface DataType {
   eraser: boolean,
@@ -131,7 +133,7 @@ export default Vue.extend({
       const base64 = canvas.toDataURL('image/jpeg')
       const link = document.createElement('a')
       link.href = base64
-      link.download = 'canvas-image'
+      link.download = 'canvas-image.jpg'
       link.click()
     },
 
@@ -145,13 +147,20 @@ export default Vue.extend({
     },
 
     onClickSetImageA (): void {
-      this.backgroundImage = require('@/assets/penta.png')
-      ;(this.$refs.VueCanvasDrawing as any).redraw()
+      this.setBackgroundImage(pentaImage)
     },
 
     onClickSetImageB (): void {
-      this.backgroundImage = require('@/assets/hexa.png')
-      ;(this.$refs.VueCanvasDrawing as any).redraw()
+      this.setBackgroundImage(hexaImage)
+    },
+
+    setBackgroundImage (image: string): void {
+      this.backgroundImage = image
+      // NOTE: 子 component の backgroundImage prop は次の tick で更新されます。
+      //       更新前に redraw すると 1 つ前の画像で描画されるため、 $nextTick を待ちます。
+      this.$nextTick(() => {
+        ;(this.$refs.VueCanvasDrawing as any).redraw()
+      })
     }
   }
 })

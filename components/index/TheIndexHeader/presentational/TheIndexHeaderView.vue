@@ -13,6 +13,7 @@
         x-small
         color="teal"
         href="https://github.com/yuu-eguci/nuxt-canvas-study"
+        rel="noopener noreferrer"
         target="_blank"
       >
         <v-icon>

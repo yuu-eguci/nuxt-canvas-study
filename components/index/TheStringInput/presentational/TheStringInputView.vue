@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    v-model="innerValue"
+    v-model="value"
     solo
     label="The string input"
     clearable
@@ -43,8 +43,10 @@ export default Vue.extend({
         return this.innerValue
       },
       // ここに↓波線を出せよ!!!!! (:string ないとき Property 'setTheString' does not exist on type '(() => any) が this.setTheString(val) に出る)
-      set (val: string): void {
-        this.setTheString(val)
+      // NOTE: v-text-field は入力値を string で、クリア時は null で渡してきます。
+      set (val: string | null): void {
+        this.innerValue = val ?? ''
+        this.setTheString(this.innerValue)
       }
     }
   },

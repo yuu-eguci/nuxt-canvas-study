@@ -1,0 +1,6 @@
+.git
+.nuxt
+dist
+coverage
+node_modules
+docs/iona-kest.md

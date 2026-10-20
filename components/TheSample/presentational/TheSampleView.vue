@@ -2,7 +2,7 @@
   <v-row>
     <v-col class="text-center">
       <img
-        src="/v.png"
+        :src="vuetifyImage"
         alt="Vuetify.js"
         class="mb-5"
       >
@@ -23,6 +23,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// NOTE: static/ のファイルには router.base が適用されないため、 assets/ から import します。
+import vuetifyImage from '@/assets/v.png'
 
 export default Vue.extend({
   name: 'TheSampleView',
@@ -37,6 +39,9 @@ export default Vue.extend({
       required: true
     }
   },
+  data: () => ({
+    vuetifyImage
+  }),
   computed: {
     randomData (): string {
       return this.getRandomData()
